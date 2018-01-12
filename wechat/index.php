@@ -10,7 +10,17 @@ $openid = $wechat->getRevFrom();
 switch($type) {
     case Wechat::MSGTYPE_TEXT: // Current use text to query coin info directly
         $code = $wechat->getRevContent();
-        if (in_array($code, $coins)) {
+        if (strcasecmp($code, 't5') == 0) {
+            $text = $util->fetch_top5();
+            $text = "当前最贵的5个币：\n" . $text'
+            $wechat->text($text)->reply();
+        }
+        else if (strcasecmp($code, 'b5') == 0) {
+            $text = $util->fetch_bottom5();
+            $text = "当前最便宜的5个币：\n" . $text'
+            $wechat->text($text)->reply();
+        }
+        else (in_array($code, $coins)) {
             $data = $util->fetch_code($code);
             $text = $code . ': ' . $data['price'] . ",\n";
             $text .= '更新时间' . $data['updated_at'] . '。';
@@ -26,17 +36,6 @@ switch($type) {
             $text = '欢迎访问比特小助手，数据来源OKEX，' . "\n";
             $text .= '数据刷新时间大约15~30秒。';
             $wechat->text($text)->reply();
-        }
-        else if ($event_type = 'CLICK') {
-            if ($event_key == 'btc_top_10') {
-                // TODO: BTC TOP 10
-            }
-            else if ($event_key == 'btc_bottom_10') {
-                // TODO: BTC BOTTOM 10
-            }
-            else if ($event_key == 'cash') {
-                // TODO: cash
-            }
         }
 }
 
