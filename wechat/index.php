@@ -11,19 +11,21 @@ switch($type) {
     case Wechat::MSGTYPE_TEXT: // Current use text to query coin info directly
         $code = $wechat->getRevContent();
         if (strcasecmp($code, 't5') == 0) {
-            $text = $util->fetch_top5();
-            $text = "当前最贵的5个币：\n" . $text'
+            $data = $util->fetch_tops();
+            $text = "当前最贵的5个币：\n" . $data['data'] + "\n'
+            $text .= '更新时间' . $data['updated_at'];
             $wechat->text($text)->reply();
         }
         else if (strcasecmp($code, 'b5') == 0) {
-            $text = $util->fetch_bottom5();
-            $text = "当前最便宜的5个币：\n" . $text'
+            $text = $util->fetch_bottoms();
+            $text = "当前最贵的5个币：\n" . $data['data'] + "\n'
+            $text .= '更新时间' . $data['updated_at'];
             $wechat->text($text)->reply();
         }
         else (in_array($code, $coins)) {
             $data = $util->fetch_code($code);
-            $text = $code . ': ' . $data['price'] . ",\n";
-            $text .= '更新时间' . $data['updated_at'] . '。';
+            $text = $code . ': ' . $data['price'] . "\n";
+            $text .= '更新时间' . $data['updated_at'];
             $wechat->text($text)->reply();
         }
         else {
