@@ -3,7 +3,7 @@
 include 'lib/dao.class.php';
 include 'lib/wechat.class.php';
 
-define('HOME_FOLDER', 'xxxxx');
+define('HOME_FOLDER', 'bithelper');
 
 $coins = array('ltc',
                'eth',
