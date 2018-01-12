@@ -2,6 +2,7 @@
 
 include 'lib/dao.class.php';
 include 'lib/wechat.class.php';
+include 'lib/util.class.php';
 
 define('HOME_FOLDER', 'bithelper');
 
