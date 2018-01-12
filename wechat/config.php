@@ -108,10 +108,10 @@ $coins = array('ltc',
                'zec',
                'zrx');
 
-$dao_options = array('dsn' => 'mysql:host=localhost;dbname=bithelper;',
-                     'username' => 'root',
-                     'password' => '',
-                     'options' => array(PDO::MYSQL_ATTR_INIT_COMMAND => 'set names utf8'));
+$dao_options = ['dsn' => 'mysql:host=localhost;dbname=bithelper;',
+                'username' => 'root',
+                'password' => '',
+                'options' => [PDO::MYSQL_ATTR_INIT_COMMAND => 'set names utf8']];
 $dao = new DAO($dao_options);
 
 function logdebug($text) {
@@ -120,11 +120,11 @@ function logdebug($text) {
                       FILE_APPEND);
 }
 
-$wechat_options = array('appid' => 'wxf3051f460146fdd3',
-                        'appsecret' => 'TODO',
-                        'token' => 'bithelper',
-                        'debug' => true,
-                        'logcallback' => 'logdebug');
+$wechat_options = ['appid' => 'wxf3051f460146fdd3',
+                   'appsecret' => 'TODO',
+                   'token' => 'bithelper',
+                   'debug' => true,
+                   'logcallback' => 'logdebug'];
 $wechat = new Wechat($wechat_options);
 
 $util = new Util($dao);
