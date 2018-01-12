@@ -13,7 +13,7 @@ switch($type) {
         if (in_array($code, $coins)) {
             $data = $util->fetch_code($code);
             $text = $code . ': ' . $data['price'] . ",\n";
-            $text .= '最后更新时间' . $data['updated_at'] . '。';
+            $text .= '更新时间' . $data['updated_at'] . '。';
             $wechat->text($text)->reply();
         }
         else {
