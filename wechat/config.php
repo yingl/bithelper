@@ -121,7 +121,7 @@ function logdebug($text) {
 }
 
 $wechat_options = array('appid' => 'wxf3051f460146fdd3',
-                        'appsecret' => '50a415f994a828629104db9e71fe5323',
+                        'appsecret' => 'TODO',
                         'token' => 'bithelper',
                         'debug' => true,
                         'logcallback' => 'logdebug');
