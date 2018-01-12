@@ -36,7 +36,11 @@ switch($type) {
         $event_type = $event_array['event'];
         if ($event_type == 'subscribe') {
             $text = '欢迎访问比特小助手，数据来源OKEX，' . "\n";
-            $text .= '数据刷新时间大约15~30秒。';
+            $text .= "数据刷新时间大约15~30秒。\n";
+            $text .= "常用命令：\n";
+            $text .= "- t5: 最贵的5个币（vs BTC）\n"
+            $text .= "- b5: 最便宜的5个币（vs BTC）\n"
+            $text .= '- ltc/xrp/...: 任意币的代码缩写，返回BTC报价。'
             $wechat->text($text)->reply();
         }
 }
