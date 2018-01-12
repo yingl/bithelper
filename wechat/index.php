@@ -23,7 +23,9 @@ switch($type) {
         $event_array = $wechat->getRevEvent();
         $event_type = $event_array['event'];
         if ($event_type == 'subscribe') {
-            $wechat->text('欢迎访问比特小助手，数据来源OKEX。')->reply();
+            $text = '欢迎访问比特小助手，数据来源OKEX，' . "\n";
+            $text .= '数据刷新时间大约15~30秒。';
+            $wechat->text($text)->reply();
         }
         else if ($event_type = 'CLICK') {
             if ($event_key == 'btc_top_10') {
