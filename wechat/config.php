@@ -4,8 +4,6 @@ include 'lib/dao.class.php';
 include 'lib/wechat.class.php';
 include 'lib/util.class.php';
 
-define('HOME_FOLDER', 'bithelper');
-
 $coins = array('ltc',
                'eth',
                'etc',
@@ -115,7 +113,7 @@ $dao_options = ['dsn' => 'mysql:host=localhost;dbname=bithelper;',
 $dao = new DAO($dao_options);
 
 function logdebug($text) {
-    file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/' . HOME_FOLDER . '/log.txt',
+    file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/log.txt',
                       $text. "\n",
                       FILE_APPEND);
 }
