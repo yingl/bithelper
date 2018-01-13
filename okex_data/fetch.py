@@ -75,4 +75,4 @@ async def fetch_ticker():
 
 if __name__ == '__main__':
     # Hard code the file path because we'll set the dir to root
-    daemonize('/home/bear/work/github/bithelper/okex/pid.txt')
+    daemonize('/home/bear/work/github/bithelper/okex_data/pid.txt')
