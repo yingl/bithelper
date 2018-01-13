@@ -17,7 +17,7 @@ switch($type) {
             $wechat->text($text)->reply();
         }
         else if (strcasecmp($code, 'b5') == 0) {
-            $text = $util->fetch_bottoms();
+            $data = $util->fetch_bottoms();
             $text = "当前最贵的5个币：\n" . $data['data'] + "\n";
             $text .= '更新时间' . $data['updated_at'];
             $wechat->text($text)->reply();
