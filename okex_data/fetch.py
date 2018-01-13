@@ -32,7 +32,7 @@ def daemonize(pid_file=None):
         atexit.register(os.remove, pid_file)
     # Do works
     session = AsyncSession(n=(os.cpu_count() * 2))
-    fetch_ticler.session = session
+    fetch_ticker.session = session
     session.run(fetch_ticker)
     
 def write_tops(prices):
