@@ -71,7 +71,7 @@ async def fetch_ticker():
         prices = sorted(prices, key=lambda x: x['price'])
         write_tops(prices[-6:-1][::-1])
         write_bottoms(prices[:5])
-        time.sleep(15)
+        time.sleep(30)
 
 if __name__ == '__main__':
     # Hard code the file path because we'll set the dir to root
