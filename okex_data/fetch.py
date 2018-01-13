@@ -32,8 +32,8 @@ def daemonize(pid_file=None):
         atexit.register(os.remove, pid_file)
     # Do works
     session = AsyncSession(n=(os.cpu_count() * 2))
-    while True:
-        session.run(fetch_ticker)
+    fetch_ticler.session = session
+    session.run(fetch_ticker)
     
 def write_tops(prices):
     data = []
@@ -52,30 +52,27 @@ def write_bottoms(prices):
     r.save()
 
 async def fetch_ticker():
-    responses = []
-    for coin in coins.coins:
-        responses.append(await session.get('https://www.okex.com/api/v1/ticker.do?symbol=%s_btc' % coin))
-    prices = []
-    for resp in responses:
-        jdata = resp.json()
-        url = resp.url
-        code = url.split('?')[1].split('=')[1].split('_')[0]
-        price = float(jdata['ticker']['last'])
-        prices.append({'code': code, 'price': price})
-        r = database.btc_values()
-        r.code = code
-        r.price = price
-        r.save()
-    prices = sorted(prices, key=lambda x: x['price'])
-    write_tops(prices[-6:-1][::-1])
-    write_bottoms(prices[:5])
-    print('sleep 15s...')
-    time.sleep(15)
+    session = fetch_ticker.session
+    while True:
+        responses = []
+        for coin in coins.coins:
+            responses.append(await session.get('https://www.okex.com/api/v1/ticker.do?symbol=%s_btc' % coin))
+        prices = []
+        for resp in responses:
+            jdata = resp.json()
+            url = resp.url
+            code = url.split('?')[1].split('=')[1].split('_')[0]
+            price = float(jdata['ticker']['last'])
+            prices.append({'code': code, 'price': price})
+            r = database.btc_values()
+            r.code = code
+            r.price = price
+            r.save()
+        prices = sorted(prices, key=lambda x: x['price'])
+        write_tops(prices[-6:-1][::-1])
+        write_bottoms(prices[:5])
+        time.sleep(15)
 
 if __name__ == '__main__':
-    """
-    session = AsyncSession(n=(os.cpu_count() * 2))
-    while True:
-        session.run(fetch_ticker)
-    """
-    daemonize('pid.txt')
+    # Hard code the file path because we'll set the dir to root
+    daemonize('/home/bear/work/github/bithelper/okex/pid.txt')
