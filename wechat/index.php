@@ -29,7 +29,7 @@ switch($type) {
             $wechat->text($text)->reply();
         }
         else if (strcasecmp($code, 'z1h') == 0) {
-            $data = $util->fetch_aggs('bts_change_1h_top5');
+            $data = $util->fetch_aggs('bts_change_1hour_top5');
             $text = "最近1小时涨幅最大的5个币：\n" . $data['data'] . "\n";
             $text .= '更新时间' . $data['updated_at'];
             $wechat->text($text)->reply();
@@ -41,7 +41,7 @@ switch($type) {
             $wechat->text($text)->reply();
         }
         else if (strcasecmp($code, 'd1h') == 0) {
-            $data = $util->fetch_aggs('bts_change_1h_bottom5');
+            $data = $util->fetch_aggs('bts_change_1hour_bottom5');
             $text = "最近1小时跌幅最大的5个币：\n" . $data['data'] . "\n";
             $text .= '更新时间' . $data['updated_at'];
             $wechat->text($text)->reply();
