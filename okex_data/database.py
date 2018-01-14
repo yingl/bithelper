@@ -33,6 +33,13 @@ class btc_values(Model):
     class Meta:
         database = db
 
+class btc_k_data(Model):
+    data = TextField()
+    tag = CharField()
+    updated_at = DateTimeField(default=dt.datetime.now)
+    class Meta:
+        database = db
+
 if __name__ == '__main__':
     try:
         db.connect()
