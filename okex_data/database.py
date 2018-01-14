@@ -43,7 +43,7 @@ class btc_k_data(Model):
 if __name__ == '__main__':
     try:
         db.connect()
-        db.create_tables([btc_tops, btc_bottoms, btc_values], safe=True)
+        db.create_tables([btc_tops, btc_bottoms, btc_values, btc_k_data], safe=True)
     except Exception as e:
         print('%s\n%s' % (e, traceback.print_exc()))
     finally:
