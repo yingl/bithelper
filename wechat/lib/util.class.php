@@ -15,7 +15,7 @@ class Util {
 
     public function fetch_aggs($tag) {
         $query = 'select * from btc_aggs where tag = ? order by updated_at desc limit 1';
-        $info = $this->dao->execute_with_fetch($query);
+        $info = $this->dao->execute_with_fetch($query, array($tag));
         return $info[0];
     }
 }
