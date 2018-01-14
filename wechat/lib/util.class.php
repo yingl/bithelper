@@ -12,15 +12,9 @@ class Util {
         $info = $this->dao->execute_with_fetch($query, array($code));
         return $info[0];
     }
-    
-    public function fetch_tops() {
-        $query = 'select * from btc_tops order by updated_at desc limit 1';
-        $info = $this->dao->execute_with_fetch($query);
-        return $info[0];
-    }
-    
-    public function fetch_bottoms() {
-        $query = 'select * from btc_bottoms order by updated_at desc limit 1';
+
+    public function fetch_aggs($tag) {
+        $query = 'select * from btc_aggs where tag = ? order by updated_at desc limit 1';
         $info = $this->dao->execute_with_fetch($query);
         return $info[0];
     }
