@@ -46,7 +46,7 @@ async def fetch_kline():
             prices = sorted(prices, key=lambda x: x['pct_chg'])
             write_to_aggs(prices[-6:-1][::-1], 'bts_change_%s_top5' % k)
             write_to_aggs(prices[:5], 'bts_change_%s_bottom5' % k)
-        time.sleep(45)
+        time.sleep(60)
 
 if __name__ == '__main__':
     args = parse_args()
