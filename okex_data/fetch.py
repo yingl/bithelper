@@ -73,6 +73,42 @@ async def fetch_ticker():
         write_bottoms(prices[:5])
         time.sleep(30)
 
+def write_btc_kdata(prices, tag):
+    data = []
+    for item in prices:
+        data.append('%s: %.09f, %.03f' % (item['code'], item['close'], item['pct_change']))
+    r = database.btc_bottoms()
+    r.data = '\n'.join(data)
+    r.tag = tag
+    r.save()
+
+async def fetch_kline():
+    session = fetch_kline.session
+    ks = ['15min', '1hour', '1day']
+    while True:
+        for k in ks:
+            responses = []
+            for coin in coins.coins:
+                responses.append(await session.get('https://www.okex.com/api/v1/kline.do?symbol=%s&type=%s&size=1' % \
+                                                   (coin, k)))
+            k_datas = []
+            for response in responses:
+                jdata = response.json()[0] # Becasue it returns an array of arrays
+                url = resp.url
+                code = url.split('?')[1].split('&')[0].split('=')[1]
+                open_ = jdata[1]
+                close_ = jdata[4]
+                pct_change = (close_ - open_) / open_ # all day trading...
+                k_datas.append({'code': code,
+                                'open': open_,
+                                'close': close_,
+                                'pct_change': pct_change})
+            k_datas = sorted(k_datas, key=lambda x: x['pct_change'])
+            top5 = k_data[-6:-1][::-1]
+            bottom5 = k_data[:5]
+            write_btc_kdata(top5, 'top5_%s' % k)
+            write_btc_kdata(bottom5, 'bottom5_%s' % k)          
+
 if __name__ == '__main__':
     # Hard code the file path because we'll set the dir to root
     daemonize('/home/bear/work/github/bithelper/okex_data/pid.txt')
