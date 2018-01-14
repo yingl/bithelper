@@ -77,7 +77,7 @@ def write_btc_kdata(prices, tag):
     data = []
     for item in prices:
         data.append('%s: %.09f, %.03f' % (item['code'], item['close'], item['pct_change']))
-    r = database.btc_bottoms()
+    r = database.btc_k_data()
     r.data = '\n'.join(data)
     r.tag = tag
     r.save()
