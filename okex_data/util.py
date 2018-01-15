@@ -5,7 +5,7 @@ from requests_threads import AsyncSession
 sys.path.append('./')
 import database
 
-def daemonize(func, pid_file=None, debug=False):
+def daemonize(func, pid_file=None, log_file = None, debug=False):
     if not debug:
         pid = os.fork()
         if pid:
