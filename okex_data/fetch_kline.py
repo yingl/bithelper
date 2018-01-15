@@ -59,4 +59,5 @@ if __name__ == '__main__':
     args = parse_args()
     util.daemonize(fetch_kline,
                    os.path.join(os.getcwd(), 'pid_kline.txt'),
+                   os.path.join(os.getcwd(), 'log_kline.txt'),
                    args.debug)
