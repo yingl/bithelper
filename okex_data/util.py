@@ -1,7 +1,6 @@
 import atexit
 import os
 import sys
-import traceback
 from requests_threads import AsyncSession
 sys.path.append('./')
 import database
