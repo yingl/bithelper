@@ -6,7 +6,7 @@ from requests_threads import AsyncSession
 sys.path.append('./')
 import database
 
-def daemonize(func, pid_file=None, debug=False):
+def daemonize(func, pid_file=None, log_file=None, debug=False):
     if not debug:
         pid = os.fork()
         if pid:
@@ -32,6 +32,7 @@ def daemonize(func, pid_file=None, debug=False):
     # Do works
     session = AsyncSession(n=(os.cpu_count() * 2))
     func.session = session
+    func.log_file = log_file
     session.run(func)
 
 def write_values(code, price):
